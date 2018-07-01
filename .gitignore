@@ -1,0 +1,8 @@
+node_modules/
+.env
+website/npm-debug.log.*
+web-api/npm-debug.log.*
+.vs
+.idea
+npm-debug.log
+node_modules
