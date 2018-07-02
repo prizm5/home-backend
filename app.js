@@ -10,6 +10,7 @@ rsmq = new RedisSMQ({ host: mqhost, port: 6379, ns: "rsmq" });
 rsmq.createQueue({ qname: "myqueue" }, (err, resp) => {
   if (resp === 1) { console.log("queue created") }
 });
+
 rsmq.listQueues( function (err, queues) {
   if(err) {
     console.error( err )
@@ -32,11 +33,9 @@ worker.on( "message", function( msg, next, id ){
     .then(next())
 });
 
-
-// Listen to errors
-	worker.on('error', function( err, msg ){
-	    console.log( "ERROR", err, msg.id );
-	});
-	worker.on('timeout', function( msg ){
-	    console.log( "TIMEOUT", msg.id, msg.rc );
-	});
+worker.on('error', function( err, msg ){
+    console.log( "ERROR", err, msg.id );
+});
+worker.on('timeout', function( msg ){
+    console.log( "TIMEOUT", msg.id, msg.rc );
+});
